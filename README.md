@@ -39,6 +39,7 @@ Application will focus on:
 - Default Currency
 - Information related to package subscribed
 - Backup and Restore Whole Data
+- Active Fiscal year
 
 ## Outlet Mgmt
 - Max no of outlets are defined by tenant subscription
@@ -48,6 +49,13 @@ Application will focus on:
 - default cash ledger to be mapped
 - default bank ledger to be mapped
 - Shift Open/Close Required for Txn
+
+## Fiscal year
+- Code [pk, string, 10], start date, end date, last bill no, last receipt no
+
+## Fiscal year Acc Voucher Config
+- tracks last voucher no of different types of voucher types
+
 
 ## Cost Center [Billing Counters]
 - Used in Restaurant POS for matching Billing Counter, BAR, KTICHEN
@@ -72,6 +80,11 @@ Application will focus on:
 - Supplier CRUD with payable snapshot and opening balance
 - Check Statement, Email Statement, Make Payments
 
+## Payment Methods
+- CRUD Operation
+- May be of type: Cash, Credit, QR, Bank, Cheque, Credit Card.
+- QR, Bank, Credit Card are linked with bank ledger
+
 ## Inventory modules features
 - Products, Categories, Units CRUD Operation
 - products can be marked taxable/non taxable, Track Stock Yes/No
@@ -91,3 +104,12 @@ Application will focus on:
 - Balance Sheet
 - Profit and Loss
 - Cash Flow
+
+## Other Modules + Accounting Module Link
+- Each Customer, Supplier, Cash & Bank must sync up with accounting module ledgers.
+- customer sync up sundry debtors ledger category should be linked and mapped via default ledger settings
+- supplier sync up sundry creditors ledger category should be linked and mapped via default ledger settings
+- cash ledgers should be mapped from default ledger settings
+- bank ledgers should also be mapped from default ledger settings
+- staff salary ledger category should be linked and mapped via default ledger settings
+- 
