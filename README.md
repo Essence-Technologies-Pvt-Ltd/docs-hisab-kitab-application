@@ -3,6 +3,7 @@
 
 ## Build ERP Application in flutter Application with different types of users: OrgAdmin, Finance and General.
 Application will focus on: 
+- Login/Register Authentication
 - General Accounting, Multiple outlets, Multiple Currency
 - Product Items with Multiple Units, Child Items
 - Customers, Supplier, Financial Balance Snapshot
