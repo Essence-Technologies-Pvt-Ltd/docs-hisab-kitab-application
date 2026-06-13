@@ -1,6 +1,7 @@
 # docs-hisab-kitab-application
 - backend application webapi ref: https://api-cloud.restroorder.com/swagger/index.html
 
+
 ## Build ERP Application in flutter Application with different types of users: OrgAdmin, Finance and General.
 Application will focus on: 
 - Login/Register Authentication
@@ -113,3 +114,70 @@ Application will focus on:
 - bank ledgers should also be mapped from default ledger settings
 - staff salary ledger category should be linked and mapped via default ledger settings
 - 
+
+
+# Hisab-Kitab Ledger Integration: Hisab-Kitab ERP Mobile
+
+An offline-first, multi-currency ledger bookkeeper and credits management extension built for **Hisab-Kitab ERP Mobile**. This system merges traditional micro-merchant credit ledgers ("Udhar Book") with automated enterprise accounting and double-entry voucher journals list structures.
+
+---
+
+## 🎨 Core Architectural Features
+
+### 1. Traditional Khata Ledger Books ("Hisab Kitab")
+- **Active Ledger Timeline:** View sorted ledger lines showing specific credits, payments, dates, and item remarks.
+- **Red "You Gave / Udhar" Records:** Log credit issued to customers or payments forwarded to suppliers.
+- **Green "You Got / Jama" Records:** Log collections received from customers or bills received from suppliers.
+- **Auto-Balance Synchronizer:** Balance deltas cascade directly to accounts receivable or payable directories upon entry.
+
+### 2. Settle & Sync Toolkit
+- **One-Tap Settle:** Clear out outstanding client balances through automatic offset transaction logs.
+- **SMS/WhatsApp Reminders:** Copy friendly, personalized payment reminder templates populated with current balances to the clipboard.
+- **Interactive Reversals:** Support row-level transaction deletions that safely reverse current balances.
+
+### 3. High-Contrast PDF Statements
+- **Printable Statements:** Generates high-fidelity preview sheets matching professional invoice templates.
+- **Aesthetic Page Design:** Formatted with top watermarks, terminal locations, clear party blocks, and hand-written sign-offs.
+- **Running Ledger Table:** Chronologically lists dates, particulars, debits, credits, and progressive running balance columns.
+- **System Print Ingress:** Direct trigger to interface with standard browser system printers.
+
+---
+
+## 📱 Interactive User Experience
+
+### Recording an Udhar/Credit (You Gave)
+1. Navigate to the **Partners Dashboard** tab.
+2. Select any active Financial Partner to expand their ledger profile options.
+3. Tap **🔴 YOU GAVE**.
+4. Enter the amount option, details (such as invoice number or itemized menu details), and transaction date.
+5. Tap **Book Entry** to play the high-frequency scan tone and capture the entry.
+
+### Generating PDF Reports
+1. Expand the target Customer/Supplier.
+2. Under the actions row, tap **📄 PDF Report**.
+3. Review the high-contrast printed preview sheet containing summaries and running ledger balances.
+4. Tap **🖨️ Print Document** to trigger standard browser print dialogs.
+
+---
+
+## 🗃️ Under the Hood: Data Schema
+
+```typescript
+interface FinancialPartner {
+  id: string;
+  type: 'Customer' | 'Supplier';
+  name: string;
+  code: string;
+  balanceCurrency: 'AED' | 'USD' | 'GBP';
+  balance: number; // Positive (+) for Receivable Debit, Negative (-) for Payable Credit
+  creditLimit: number;
+}
+
+interface PartnerTransaction {
+  id: string;
+  partnerId: string;
+  type: 'Credit' | 'Payment'; // Credit (You Gave - Udhar) or Payment (You Got - Jama)
+  remarks: string;
+  amount: number;
+  date: string;
+}
